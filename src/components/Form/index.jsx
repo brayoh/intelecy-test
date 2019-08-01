@@ -8,7 +8,7 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      cityName: 'nairobi',
+      cityName: '',
       showErr: false,
     };
 

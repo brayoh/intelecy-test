@@ -1,1 +1,8 @@
 /node_modules
+
+# vs code files
+.vscode
+
+# build folder
+build/*
+
