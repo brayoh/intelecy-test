@@ -1,52 +1,78 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import './Form.css';
-import { displayName } from '../../actions';
+/** actions */
+import { fetchWeatherForeCast } from '../../actions';
 
 class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      cityName: 'nairobi',
       showErr: false,
     };
+
     this.handleChange = this.handleChange.bind(this);
-    this.submitName = this.submitName.bind(this);
+    this.submitCityName = this.submitCityName.bind(this);
   }
 
   handleChange(event) {
-    this.setState({ name: event.target.value });
+    this.setState({ cityName: event.target.value });
   }
 
-  submitName() {
-    if (this.state.name.length >= 1) {
+  submitCityName() {
+    // validate form
+    if (this.state.cityName.length >= 1) {
       this.setState({ showErr: false });
-      this.props.displayNameHandler(this.state.name);
-    } else this.setState({ showErr: true });
+
+      // fetch data from api
+      this.props.fetchWeatherForeCastHandler(this.state.cityName);
+    } else {
+      this.setState({ showErr: true });
+    }
   }
 
   render() {
+    const { loading, error } = this.props;
+
     return (
       <div className="form">
         <h1>Intelecy challenge!</h1>
         <input
           type="text"
           placeholder="Enter a city"
-          value={this.state.name}
+          value={this.state.cityName}
           onChange={this.handleChange}
         />
-        <p className="error-msg">{this.state.showErr ? 'Field cannot be empty' : ''}</p>
-        <button onClick={e => this.submitName()} >Trigger action</button>
+        <p className="error-msg">
+          {this.state.showErr ? 'Field cannot be empty' : ''}
+          {error && error}
+        </p>
+        <button
+          disabled={loading}
+          className="btn"
+          onClick={this.submitCityName}
+        >
+          {loading ? 'Fetching data...' : 'Search'}
+        </button>
       </div>
     );
   }
 }
 
 function mapDispatchToProps(dispatch) {
-  return ({
-    displayNameHandler: (name) => { dispatch(displayName(name)); },
-  });
+  return {
+    fetchWeatherForeCastHandler: path => {
+      dispatch(fetchWeatherForeCast(path));
+    },
+  };
 }
 
-export default connect(null, mapDispatchToProps)(Form);
+function mapStateToProps(state) {
+  return {
+    loading: state.form.loading,
+    error: state.form.error,
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Form);

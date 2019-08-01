@@ -4,7 +4,7 @@ import Form from './components/Form';
 import Graph from './components/Graph';
 
 const App = () => (
-  <div>
+  <div className="wrapper">
     <Form />
     <Graph />
   </div>
