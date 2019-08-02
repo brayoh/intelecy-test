@@ -13,9 +13,7 @@ const getStore = () => {
     const store = createStore(rootReducer, applyMiddleware(logger, thunk));
     return store;
   } else if (Config === 'production') {
-    const store = createStore(combineReducers({
-      form,
-    }));
+    const store = createStore(rootReducer, applyMiddleware(thunk));
     return store;
   }
 };
