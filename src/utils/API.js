@@ -9,9 +9,6 @@ const API = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  params: {
-    appid: APP_ID,
-  },
 });
 
 // export singleton instance

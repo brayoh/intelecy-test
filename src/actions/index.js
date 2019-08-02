@@ -8,7 +8,7 @@ import {
 import API from '../utils/API';
 
 /** constants */
-import { APP_ID } from '../utils/constants';
+import { APP_ID, UNIT_TYPE } from '../utils/constants';
 
 export const initialState = state => ({
   state,
@@ -68,6 +68,7 @@ export function fetchWeatherForeCast(cityName) {
       params: {
         q: cityName,
         appid: APP_ID,
+        units: UNIT_TYPE,
       },
     })
       .then(response => dispatch(fetchWeatherForeCastSuccess(response.data)))

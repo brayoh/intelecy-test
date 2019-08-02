@@ -33,7 +33,7 @@ const Graph = ({ weatherData }) => (
       stroke="rgba(200, 0, 0, 0.8)"
       name="max temperature"
     />
-    <CartesianGrid vertical={false} stroke="#e6f2ff" />
+    <CartesianGrid vertical={true} stroke="#e6f2ff" />
     <XAxis tickLine={false} dataKey="name" />
     <YAxis tickLine={false} />
     <Tooltip />
