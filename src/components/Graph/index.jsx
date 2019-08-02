@@ -16,22 +16,27 @@ import { formatMapWeatherData } from '../../utils/helpers';
 const Graph = ({ weatherData }) => (
   <LineChart
     width={1200}
-    height={800}
+    height={600}
     data={weatherData}
     style={{ margin: 'auto' }}
   >
-    <Line type="monotone" dataKey="temp" stroke="#5b9d98" name="temperature" />
+    <Line
+      type="monotone"
+      dataKey="temp"
+      stroke="#5b9d98"
+      name="temperature (degrees)"
+    />
     <Line
       type="monotone"
       dataKey="tempMin"
       stroke="#83e6b4"
-      name="min temperature"
+      name="min temperature (degrees)"
     />
     <Line
       type="monotone"
       dataKey="tempMax"
       stroke="rgba(200, 0, 0, 0.8)"
-      name="max temperature"
+      name="max temperature (degrees)"
     />
     <CartesianGrid vertical={true} stroke="#e6f2ff" />
     <XAxis tickLine={false} dataKey="name" />
